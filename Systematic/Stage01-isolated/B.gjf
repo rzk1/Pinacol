@@ -1,0 +1,15 @@
+%NProcShared=32
+%chk=Hydrazine.chk
+#p opt freq b3lyp/6-31g(d,p) scrf=(iefpcm,solvent=acetonitrile)
+empiricaldispersion=gd3
+
+Title Card Required
+
+0 1
+ H                 -5.10771700    1.44435900    0.69815800
+ N                 -4.79675500   -0.41087400    0.02966700
+ H                 -5.30327000   -0.69972800   -0.80771800
+ N                 -4.63303400    1.04583900   -0.11252400
+ H                 -3.64728700    1.26138900    0.05278000
+ H                 -3.87230800   -0.82985800   -0.08919700
+

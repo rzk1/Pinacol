@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --time=03:00:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=32
+# -- #SBATCH --ntasks=32
+#SBATCH --mem=MaxMemPerNode
+#SBATCH --account=rrg-rzk 
+#SBATCH --job-name=AH-Opt-State-12
+#SBATCH --error=_AH-Opt-State-12.stde
+#SBATCH --output=_AH-Opt-State-12.stdo
+
+# set EXE environment
+module load gaussian/g16.b01
+PATH=$PATH:$HOME/bin
+export PATH
+workd=${SLURM_SUBMIT_DIR}
+cd $workd
+
+g16 < AH-Opt-State-12.gjf >& $workd/AH-Opt-State-12.log

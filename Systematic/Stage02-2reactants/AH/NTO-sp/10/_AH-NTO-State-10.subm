@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --time=00:05:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=32
+# -- #SBATCH --ntasks=32
+#SBATCH --mem=MaxMemPerNode
+#SBATCH --account=rrg-rzk 
+#SBATCH --job-name=AH-NTO-State-10
+#SBATCH --error=_AH-NTO-State-10.stde
+#SBATCH --output=_AH-NTO-State-10.stdo
+
+# set EXE environment
+module load gaussian/g16.b01
+PATH=$PATH:$HOME/bin
+export PATH
+workd=${SLURM_SUBMIT_DIR}
+cd $workd
+
+g16 < AH-NTO-State-10.gjf >& $workd/AH-NTO-State-10.log

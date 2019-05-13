@@ -1,0 +1,13 @@
+%NProcShared=2
+%chk=B-cis.chk
+#p opt freq b3lyp/6-31g(d,p) scrf=(iefpcm,solvent=acetonitrile)
+empiricaldispersion=gd3
+
+Title Card Required
+
+0 1
+ N                 -0.71041123    0.07686317    0.10189578
+ H                 -1.05858114   -0.84358217    0.37177221
+ N                  0.71041122    0.07686916   -0.10189138
+ H                  1.05858135   -0.84356060   -0.37182073
+

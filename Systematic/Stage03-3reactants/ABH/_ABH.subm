@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --time=00:20:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=32
+# -- #SBATCH --ntasks=32
+#SBATCH --mem=MaxMemPerNode
+#SBATCH --account=rrg-rzk 
+#SBATCH --job-name=ABH
+#SBATCH --error=_ABH.stde
+#SBATCH --output=_ABH.stdo
+
+# set EXE environment
+module load gaussian/g16.b01
+PATH=$PATH:$HOME/bin
+export PATH
+workd=${SLURM_SUBMIT_DIR}
+cd $workd
+
+g16 < ABH.gjf >& $workd/ABH.log

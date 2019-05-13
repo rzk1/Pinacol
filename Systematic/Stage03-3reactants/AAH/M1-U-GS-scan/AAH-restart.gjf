@@ -1,0 +1,5 @@
+%NProcShared=32
+%chk=AAH-restart.chk
+#p opt=(restart,modredundant) ub3lyp/6-31g(d,p) scrf=(iefpcm,solvent=acetonitrile)
+empiricaldispersion=gd3 guess=(core,mix,always)
+
