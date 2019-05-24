@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --time=04:00:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=32
+# -- #SBATCH --ntasks=32
+#SBATCH --mem=MaxMemPerNode
+#SBATCH --account=rrg-rzk 
+#SBATCH --job-name=M3-U
+#SBATCH --error=_M3-U.stde
+#SBATCH --output=_M3-U.stdo
+
+# set EXE environment
+module load gaussian/g16.b01
+PATH=$PATH:$HOME/bin
+export PATH
+workd=${SLURM_SUBMIT_DIR}
+cd $workd
+
+g16 < M3-U.gjf >& $workd/M3-U.log
