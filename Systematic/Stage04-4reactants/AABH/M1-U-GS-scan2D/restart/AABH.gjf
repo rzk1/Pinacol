@@ -1,0 +1,5 @@
+%chk=AABH.chk
+#p opt=(restart,modredundant) ub3lyp/6-31g(d,p)
+scrf=(iefpcm,solvent=acetonitrile) guess=(mix,always) 
+empiricaldispersion=gd3
+
