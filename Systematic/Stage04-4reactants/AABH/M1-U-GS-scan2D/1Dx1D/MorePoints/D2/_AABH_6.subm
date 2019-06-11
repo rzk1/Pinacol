@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --time=12:00:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=40
+# -- #SBATCH --ntasks=40
+#SBATCH --mem=MaxMemPerNode
+#SBATCH --account=ctb-rzk
+#SBATCH --job-name=AABH_6
+#SBATCH --error=_AABH_6.stde
+#SBATCH --output=_AABH_6.stdo
+
+# set EXE environment
+module load G16
+PATH=$PATH:$HOME/bin
+export PATH
+workd=${SLURM_SUBMIT_DIR}
+cd $workd
+
+g16 < AABH_6.gjf >& $workd/AABH_6.log
