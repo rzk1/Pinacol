@@ -1,4 +1,4 @@
-%NProcShared=32
+%NProcShared=40
 %chk=ABH.chk
 #p opt=modredundant ub3lyp/6-31g(d,p) scrf=(iefpcm,solvent=acetonitrile)
 empiricaldispersion=gd3 guess=(core,mix,always)
