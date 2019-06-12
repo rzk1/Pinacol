@@ -1,0 +1,12 @@
+%chk=N.chk
+#p opt ub3lyp/6-31g(d,p) scrf=(iefpcm,solvent=acetonitrile)
+guess=(mix,always) empiricaldispersion=gd3
+
+Title Card Required
+
+0 1
+ N                  4.05160000   -1.22321700    0.55425300
+ H                  4.98787400   -0.78748400    0.63984000
+ N                  3.66828500   -2.15338000    1.25520400
+ H                  3.41714100   -0.82654800   -0.17480600
+
