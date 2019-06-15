@@ -1,16 +1,16 @@
 #!/bin/bash
-#SBATCH --time=00:20:00
+#SBATCH --time=01:00:00
 #SBATCH --nodes=1
-#SBATCH --tasks-per-node=32
-# -- #SBATCH --ntasks=32
+#SBATCH --tasks-per-node=40
+# -- #SBATCH --ntasks=40
 #SBATCH --mem=MaxMemPerNode
-#SBATCH --account=rrg-rzk 
+#SBATCH --account=ctb-rzk
 #SBATCH --job-name=ABH
 #SBATCH --error=_ABH.stde
 #SBATCH --output=_ABH.stdo
 
 # set EXE environment
-module load gaussian/g16.b01
+module load G16
 PATH=$PATH:$HOME/bin
 export PATH
 workd=${SLURM_SUBMIT_DIR}

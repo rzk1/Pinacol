@@ -1,6 +1,6 @@
 %NProcShared=40
 %chk=Step02-sp-td.chk
-#p td=(50-50,nstates=36) ub3lyp/6-31g(d,p)
+#p td=(50-50,nstates=100) ub3lyp/6-31g(d,p)
 scrf=(iefpcm,solvent=acetonitrile) guess=(core,mix,always)
 empiricaldispersion=gd3
 
