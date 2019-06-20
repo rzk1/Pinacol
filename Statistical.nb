@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    303737,       6034]
-NotebookOptionsPosition[    296411,       5847]
-NotebookOutlinePosition[    296767,       5863]
-CellTagsIndexPosition[    296724,       5860]
+NotebookDataLength[    348671,       6947]
+NotebookOptionsPosition[    340467,       6740]
+NotebookOutlinePosition[    340823,       6756]
+CellTagsIndexPosition[    340780,       6753]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -185,7 +185,7 @@ Cell[BoxData[
       RowBox[{"MI_", ",", "T_", ",", "sig_"}], "]"}], ":=", 
      RowBox[{
       FractionBox[
-       RowBox[{"Sqrt", "[", "\[Pi]", "]"}], "sig"], 
+       RowBox[{"Sqrt", "[", "Pi", "]"}], "sig"], 
       SuperscriptBox[
        RowBox[{"(", 
         FractionBox[
@@ -193,6 +193,21 @@ Cell[BoxData[
           SuperscriptBox["\[Pi]", "2"], "kB", " ", "T"}], 
          SuperscriptBox["hPlank", "2"]], ")"}], 
        RowBox[{"3", "/", "2"}]], 
+      RowBox[{"Sqrt", "[", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"Times", ",", "MI"}], "]"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"QrotLin", "[", 
+      RowBox[{"MI_", ",", "T_", ",", "sig_"}], "]"}], ":=", 
+     RowBox[{
+      FractionBox["1", "sig"], 
+      RowBox[{"(", 
+       FractionBox[
+        RowBox[{"8", " ", 
+         SuperscriptBox["\[Pi]", "2"], "kB", " ", "T"}], 
+        SuperscriptBox["hPlank", "2"]], ")"}], 
       RowBox[{"Sqrt", "[", 
        RowBox[{"Apply", "[", 
         RowBox[{"Times", ",", "MI"}], "]"}], "]"}]}]}], ";"}], 
@@ -237,13 +252,14 @@ Cell[BoxData[
       "basis", " ", "sets", " ", "are", " ", "used"}]}], " ", "*)"}], 
    "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"Qelec", "[", 
-     RowBox[{"Egs_", ",", "Wgs_", ",", "T_"}], "]"}], ":=", 
-    RowBox[{"Wgs", " ", 
-     RowBox[{"Exp", "[", 
-      FractionBox[
-       RowBox[{"-", "Egs"}], 
-       RowBox[{"kB", " ", "T"}]], "]"}]}]}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Qelec", "[", 
+      RowBox[{"Egs_", ",", "Wgs_", ",", "T_"}], "]"}], ":=", 
+     RowBox[{"Wgs", " ", 
+      RowBox[{"Exp", "[", 
+       FractionBox[
+        RowBox[{"-", "Egs"}], 
+        RowBox[{"kB", " ", "T"}]], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
    "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{"Internal", " ", "energy"}], " ", "*)"}], "\[IndentingNewLine]", 
@@ -274,6 +290,11 @@ Cell[BoxData[
      RowBox[{"RotE", "[", "T_", "]"}], "=", 
      RowBox[{"kB", " ", "T", " ", 
       RowBox[{"3", "/", "2"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"RotELin", "[", "T_", "]"}], "=", 
+     RowBox[{"kB", " ", "T"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
     RowBox[{"Many", "-", 
      RowBox[{"atom", " ", "molecule"}]}], " ", "*)"}], "\[IndentingNewLine]", 
@@ -284,6 +305,19 @@ Cell[BoxData[
       RowBox[{"freq_", ",", "Egs_", ",", "T_"}], "]"}], ":=", 
      RowBox[{"Egs", "+", 
       RowBox[{"RotE", "[", "T", "]"}], "+", 
+      RowBox[{"TranE", "[", "T", "]"}], "+", " ", 
+      RowBox[{"Total", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"VibE", "[", 
+          RowBox[{"#", ",", "T"}], "]"}], "&"}], "/@", "freq"}], "]"}]}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"EnLin", "[", 
+      RowBox[{"freq_", ",", "Egs_", ",", "T_"}], "]"}], ":=", 
+     RowBox[{"Egs", "+", 
+      RowBox[{"RotELin", "[", "T", "]"}], "+", 
       RowBox[{"TranE", "[", "T", "]"}], "+", " ", 
       RowBox[{"Total", "[", 
        RowBox[{
@@ -309,6 +343,13 @@ Cell[BoxData[
      RowBox[{"freq_", ",", "Egs_", ",", "T_"}], "]"}], ":=", 
     RowBox[{
      RowBox[{"En", "[", 
+      RowBox[{"freq", ",", "Egs", ",", "T"}], "]"}], "+", 
+     RowBox[{"kB", " ", "T"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"HLin", "[", 
+     RowBox[{"freq_", ",", "Egs_", ",", "T_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"EnLin", "[", 
       RowBox[{"freq", ",", "Egs", ",", "T"}], "]"}], "+", 
      RowBox[{"kB", " ", "T"}]}]}], "\[IndentingNewLine]", 
    RowBox[{
@@ -345,6 +386,28 @@ Cell[BoxData[
           RowBox[{"freq", ",", "T"}], "]"}], "]"}]}], ")"}]}], "+", "Egs"}]}],
     "\[IndentingNewLine]", 
    RowBox[{
+    RowBox[{"ALin", "[", 
+     RowBox[{
+     "M_", ",", "MI_", ",", "sig_", ",", "freq_", ",", "Egs_", ",", "Wgs_", 
+      ",", "T_", ",", "P_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "kB"}], " ", "T", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Log", "[", "\[ExponentialE]", " ", "]"}], "+", 
+        RowBox[{"Log", "[", 
+         RowBox[{"Qtran", "[", 
+          RowBox[{"M", ",", "T", ",", "P"}], "]"}], "]"}], "+", 
+        RowBox[{"Log", "[", "Wgs", "]"}], "+", 
+        RowBox[{"Log", "[", 
+         RowBox[{"QrotLin", "[", 
+          RowBox[{"MI", ",", "T", ",", "sig"}], "]"}], "]"}], "+", 
+        RowBox[{"Log", "[", 
+         RowBox[{"Qvib", "[", 
+          RowBox[{"freq", ",", "T"}], "]"}], "]"}]}], ")"}]}], "+", "Egs"}]}],
+    "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{"AAtom", "[", 
      RowBox[{"M_", ",", "Egs_", ",", "Wgs_", ",", "T_", ",", "P_"}], "]"}], ":=", 
     RowBox[{
@@ -368,6 +431,17 @@ Cell[BoxData[
       ",", "T_", ",", "P_"}], "]"}], ":=", 
     RowBox[{
      RowBox[{"A", "[", 
+      RowBox[{
+      "M", ",", "MI", ",", "sig", ",", "freq", ",", "Egs", ",", "Wgs", ",", 
+       "T", ",", "P"}], "]"}], "+", 
+     RowBox[{"kB", " ", "T"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"GLin", "[", 
+     RowBox[{
+     "M_", ",", "MI_", ",", "sig_", ",", "freq_", ",", "Egs_", ",", "Wgs_", 
+      ",", "T_", ",", "P_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"ALin", "[", 
       RowBox[{
       "M", ",", "MI", ",", "sig", ",", "freq", ",", "Egs", ",", "Wgs", ",", 
        "T", ",", "P"}], "]"}], "+", 
@@ -414,7 +488,13 @@ Cell[BoxData[
    3.762970901197077*^9, 3.762970907428668*^9}, {3.762970969171137*^9, 
    3.762970975186563*^9}, {3.762971016975944*^9, 3.7629710314448338`*^9}, {
    3.762971097668672*^9, 3.76297110334452*^9}, {3.7629770601224127`*^9, 
-   3.7629770998519087`*^9}, {3.762977131655356*^9, 3.7629771777263117`*^9}}],
+   3.7629770998519087`*^9}, {3.762977131655356*^9, 3.7629771777263117`*^9}, {
+   3.7700553758159533`*^9, 3.770055381250152*^9}, {3.770055559903893*^9, 
+   3.770055566738718*^9}, {3.770055847972803*^9, 3.770055882260886*^9}, {
+   3.77005591994596*^9, 3.770056146980464*^9}, {3.770056460703044*^9, 
+   3.770056517664559*^9}, {3.770056657912747*^9, 3.770056741409944*^9}, 
+   3.770056995016415*^9, {3.77005730524419*^9, 3.770057359785842*^9}, {
+   3.7700574025157948`*^9, 3.770057428676278*^9}}],
 
 Cell[CellGroupData[{
 
@@ -438,34 +518,35 @@ Cell[BoxData[
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MA", " ", "=", 
-     RowBox[{"120.05751", "*", "amu2kg"}]}], ";", " ", 
-    RowBox[{"(*", " ", 
-     RowBox[{"molecular", " ", "mass"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"120.05751", "*", "amu2kg"}]}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"molecular", " ", "mass"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{"MIA", "=", 
      RowBox[{
       RowBox[{"{", 
        RowBox[{"491.06029", ",", "1488.22724", ",", "1968.09311"}], "}"}], 
-      "*", "MIau2kgm2"}]}], ";", " ", 
-    RowBox[{"(*", " ", 
-     RowBox[{"moments", " ", "of", " ", "inertia"}], " ", "*)"}], 
-    "\[IndentingNewLine]", 
-    RowBox[{"(*", " ", 
-     RowBox[{"to", " ", "extract", " ", "frequencies", " ", "use", " ", 
+      "*", "MIau2kgm2"}]}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"moments", " ", "of", " ", "inertia"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"to", " ", "extract", " ", "frequencies", " ", "use", " ", 
+     RowBox[{"bash", ":", " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{
-      "bash", ":", " ", "\[IndentingNewLine]", "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{
-         RowBox[{
-          RowBox[{"awk", " ", "'"}], "/", "Frequencies"}], "/", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{"printf", 
-            RowBox[{"(", 
-             RowBox[{
-             "\"\<%.4f,%.4f,%.4f,\>\"", ",", "$3", ",", "$4", ",", "$5"}], 
-             ")"}]}], "}"}], "'"}]}], " ", 
-        RowBox[{"filename", ".", "log"}]}]}]}], "\[IndentingNewLine]", 
-     "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"awk", " ", "'"}], "/", "Frequencies"}], "/", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"printf", 
+           RowBox[{"(", 
+            RowBox[{
+            "\"\<%.4f,%.4f,%.4f,\>\"", ",", "$3", ",", "$4", ",", "$5"}], 
+            ")"}]}], "}"}], "'"}]}], " ", 
+       RowBox[{"filename", ".", "log"}]}]}]}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{"FreqA", "=", 
      RowBox[{
       RowBox[{"{", 
@@ -484,16 +565,18 @@ Cell[BoxData[
         "3196.0131", ",", "3205.8155", ",", "3216.1683", ",", "3218.8833"}], 
        "}"}], "*", "c0", "*", "100"}]}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"SigmaA", "=", "1"}], ";", " ", 
-    RowBox[{"(*", " ", 
-     RowBox[{"rotational", " ", "symmetry"}], " ", "*)"}], 
-    "\[IndentingNewLine]", 
+    RowBox[{"SigmaA", "=", "1"}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"rotational", " ", "symmetry"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{"ElectronicA", "=", 
      RowBox[{
-      RowBox[{"-", "384.925582213"}], "*", "h2j"}]}], ";", " ", 
-    RowBox[{"(*", " ", 
-     RowBox[{"electronic", " ", "energy"}], " ", "*)"}], 
-    "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"-", "384.925582213"}], "*", "h2j"}]}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"electronic", " ", "energy"}], " ", "*)"}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{"Print", "[", "\"\<Molecule BH2\>\"", "]"}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{
@@ -855,6 +938,54 @@ Cell[BoxData[
       RowBox[{"-", "881.724195655"}], "*", "h2j"}]}], ";"}], 
    "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{
+    RowBox[{"Print", "[", "\"\<Molecule HH\>\"", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MHH", " ", "=", 
+     RowBox[{"2.01565", "*", "amu2kg"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MIHH", "=", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0.99381", ",", "0.99381"}], "}"}], "*", "MIau2kgm2"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FreqHH", "=", 
+     RowBox[{
+      RowBox[{"{", "4458.8127", "}"}], "*", "c0", "*", "100"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SigmaHH", "=", "2"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ElectronicHH", "=", 
+     RowBox[{
+      RowBox[{"-", "1.17867106470"}], "*", "h2j"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<Molecule NN\>\"", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MNN", " ", "=", 
+     RowBox[{"28.00615", "*", "amu2kg"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MINN", "=", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"30.54428", ",", "30.54428"}], "}"}], "*", "MIau2kgm2"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FreqNN", "=", 
+     RowBox[{
+      RowBox[{"{", "2458.9796", "}"}], "*", "c0", "*", "100"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SigmaNN", "=", "2"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ElectronicNN", "=", 
+     RowBox[{
+      RowBox[{"-", "109.524529921"}], "*", "h2j"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{"Print", "[", "\"\<Transition state AH..BH..A\>\"", "]"}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{
@@ -944,7 +1075,9 @@ Cell[BoxData[
    3.769553490583521*^9}, {3.7695604555467854`*^9, 3.769560522159137*^9}, 
    3.7695621242423677`*^9, {3.7695621567124*^9, 3.769562159499003*^9}, {
    3.7695622131000967`*^9, 3.769562238759387*^9}, {3.769626743824966*^9, 
-   3.769626745171516*^9}}],
+   3.769626745171516*^9}, {3.7700548340087223`*^9, 3.7700549667317657`*^9}, 
+   3.770055044803246*^9, {3.770055089186112*^9, 3.7700551215845747`*^9}, {
+   3.770055158159046*^9, 3.770055227464261*^9}, 3.770058145846896*^9}],
 
 Cell[CellGroupData[{
 
@@ -953,70 +1086,84 @@ Cell[BoxData["\<\"Molecule A\"\>"], "Print",
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.769562241861779*^9}],
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189314808*^9}],
 
 Cell[BoxData["\<\"Molecule BH2\"\>"], "Print",
  CellChangeTimes->{
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.769562241872541*^9}],
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189324814*^9}],
 
 Cell[BoxData["\<\"Molecule A..BH2\"\>"], "Print",
  CellChangeTimes->{
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.7695622418831577`*^9}],
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189332798*^9}],
 
 Cell[BoxData["\<\"Molecule A..BH2..A\"\>"], "Print",
  CellChangeTimes->{
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.769562241894154*^9}],
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189340646*^9}],
 
 Cell[BoxData["\<\"Molecule AAHH\"\>"], "Print",
  CellChangeTimes->{
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.769562241905064*^9}],
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189348592*^9}],
 
 Cell[BoxData["\<\"Molecule B\"\>"], "Print",
  CellChangeTimes->{
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.769562241913776*^9}],
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189356242*^9}],
 
 Cell[BoxData["\<\"Molecule AH..BH\"\>"], "Print",
  CellChangeTimes->{
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.7695622419221687`*^9}],
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189364175*^9}],
 
 Cell[BoxData["\<\"Molecule AH..BH..A\"\>"], "Print",
  CellChangeTimes->{
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.769562241930233*^9}],
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189371868*^9}],
 
 Cell[BoxData["\<\"Molecule AAHH..B\"\>"], "Print",
  CellChangeTimes->{
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.769562241938579*^9}],
+   3.769527190042535*^9, 3.769562241861779*^9, 3.7700581893796597`*^9}],
+
+Cell[BoxData["\<\"Molecule HH\"\>"], "Print",
+ CellChangeTimes->{
+  3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
+   3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
+   3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189388378*^9}],
+
+Cell[BoxData["\<\"Molecule NN\"\>"], "Print",
+ CellChangeTimes->{
+  3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
+   3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
+   3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
+   3.769527190042535*^9, 3.769562241861779*^9, 3.770058189399125*^9}],
 
 Cell[BoxData["\<\"Transition state AH..BH..A\"\>"], "Print",
  CellChangeTimes->{
   3.763031875365507*^9, 3.7630330951768293`*^9, 3.765579157156361*^9, 
    3.769466282456319*^9, 3.769466365930481*^9, {3.7695086452584553`*^9, 
    3.769508661685257*^9}, 3.76951955887226*^9, 3.769522424637095*^9, 
-   3.769527190042535*^9, 3.769562241946653*^9}]
+   3.769527190042535*^9, 3.769562241861779*^9, 3.77005818940835*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -1081,7 +1228,7 @@ Cell[BoxData[{
         RowBox[{"Qtran", "[", 
          RowBox[{"MA", ",", "T0", ",", "P0"}], "]"}], 
         RowBox[{"Qrot", "[", 
-         RowBox[{"MIA", ",", "T0", ",", "1"}], "]"}], 
+         RowBox[{"MIA", ",", "T0", ",", "SigmaA"}], "]"}], 
         RowBox[{"Qvib", "[", 
          RowBox[{"FreqA", ",", "T0"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
       
@@ -1149,7 +1296,7 @@ Cell[BoxData[{
         RowBox[{"Qtran", "[", 
          RowBox[{"MBH2", ",", "T0", ",", "P0"}], "]"}], 
         RowBox[{"Qrot", "[", 
-         RowBox[{"MIBH2", ",", "T0", ",", "1"}], "]"}], 
+         RowBox[{"MIBH2", ",", "T0", ",", "SigmaBH2"}], "]"}], 
         RowBox[{"Qvib", "[", 
          RowBox[{"FreqBH2", ",", "T0"}], "]"}]}]}], ";", 
       "\[IndentingNewLine]", 
@@ -1192,7 +1339,7 @@ Cell[BoxData[{
         RowBox[{"Qtran", "[", 
          RowBox[{"MAdotBH2", " ", ",", "T0", ",", "P0"}], "]"}], 
         RowBox[{"Qrot", "[", 
-         RowBox[{"MIAdotBH2", " ", ",", "T0", ",", "1"}], "]"}], 
+         RowBox[{"MIAdotBH2", " ", ",", "T0", ",", "SigmaAdotBH2"}], "]"}], 
         RowBox[{"Qvib", "[", 
          RowBox[{"FreqAdotBH2", " ", ",", "T0"}], "]"}]}]}], ";", 
       "\[IndentingNewLine]", 
@@ -1239,7 +1386,8 @@ Cell[BoxData[{
         RowBox[{"Qtran", "[", 
          RowBox[{"MAdotBH2dotA", " ", ",", "T0", ",", "P0"}], "]"}], 
         RowBox[{"Qrot", "[", 
-         RowBox[{"MIAdotBH2dotA", " ", ",", "T0", ",", "1"}], "]"}], 
+         RowBox[{"MIAdotBH2dotA", " ", ",", "T0", ",", "SigmaAdotBH2dotA"}], 
+         "]"}], 
         RowBox[{"Qvib", "[", 
          RowBox[{"FreqAdotBH2dotA", " ", ",", "T0"}], "]"}]}]}], ";", 
       "\[IndentingNewLine]", 
@@ -1288,7 +1436,7 @@ Cell[BoxData[{
         RowBox[{"Qtran", "[", 
          RowBox[{"MAAHH", " ", ",", "T0", ",", "P0"}], "]"}], 
         RowBox[{"Qrot", "[", 
-         RowBox[{"MIAAHH", " ", ",", "T0", ",", "1"}], "]"}], 
+         RowBox[{"MIAAHH", " ", ",", "T0", ",", "SigmaAAHH"}], "]"}], 
         RowBox[{"Qvib", "[", 
          RowBox[{"FreqAAHH", " ", ",", "T0"}], "]"}]}]}], ";", 
       "\[IndentingNewLine]", 
@@ -1333,7 +1481,7 @@ Cell[BoxData[{
         RowBox[{"Qtran", "[", 
          RowBox[{"MB", " ", ",", "T0", ",", "P0"}], "]"}], 
         RowBox[{"Qrot", "[", 
-         RowBox[{"MIB", " ", ",", "T0", ",", "1"}], "]"}], 
+         RowBox[{"MIB", " ", ",", "T0", ",", "SigmaB"}], "]"}], 
         RowBox[{"Qvib", "[", 
          RowBox[{"FreqB", " ", ",", "T0"}], "]"}]}]}], ";", 
       "\[IndentingNewLine]", 
@@ -1377,7 +1525,7 @@ Cell[BoxData[{
         RowBox[{"Qtran", "[", 
          RowBox[{"MAHdotBH", " ", ",", "T0", ",", "P0"}], "]"}], 
         RowBox[{"Qrot", "[", 
-         RowBox[{"MIAHdotBH", " ", ",", "T0", ",", "1"}], "]"}], 
+         RowBox[{"MIAHdotBH", " ", ",", "T0", ",", "SigmaAHdotBH"}], "]"}], 
         RowBox[{"Qvib", "[", 
          RowBox[{"FreqAHdotBH", " ", ",", "T0"}], "]"}]}]}], ";", 
       "\[IndentingNewLine]", 
@@ -1424,7 +1572,8 @@ Cell[BoxData[{
         RowBox[{"Qtran", "[", 
          RowBox[{"MAAHHdotB", " ", ",", "T0", ",", "P0"}], "]"}], 
         RowBox[{"Qrot", "[", 
-         RowBox[{"MIAAHHdotB", " ", ",", "T0", ",", "1"}], "]"}], 
+         RowBox[{"MIAAHHdotB", " ", ",", "T0", ",", "SigmaAAHHdotB"}], "]"}], 
+        
         RowBox[{"Qvib", "[", 
          RowBox[{"FreqAAHHdotB", " ", ",", "T0"}], "]"}]}]}], ";", 
       "\[IndentingNewLine]", 
@@ -1470,7 +1619,8 @@ Cell[BoxData[{
         RowBox[{"Qtran", "[", 
          RowBox[{"MAHdotBHdotA", " ", ",", "T0", ",", "P0"}], "]"}], 
         RowBox[{"Qrot", "[", 
-         RowBox[{"MIAHdotBHdotA", " ", ",", "T0", ",", "1"}], "]"}], 
+         RowBox[{"MIAHdotBHdotA", " ", ",", "T0", ",", "SigmaAHdotBHdotA"}], 
+         "]"}], 
         RowBox[{"Qvib", "[", 
          RowBox[{"FreqAHdotBHdotA", " ", ",", "T0"}], "]"}]}]}], ";", 
       "\[IndentingNewLine]", 
@@ -1513,6 +1663,90 @@ Cell[BoxData[{
         "FreqAHdotBHdotA", " ", ",", "ElectronicAHdotBHdotA", " ", ",", 
          "T0"}], "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
       "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", "\"\<Molecule HH\>\"", "]"}], ";", 
+      RowBox[{"QHH", " ", "=", 
+       RowBox[{
+        RowBox[{"Qtran", "[", 
+         RowBox[{"MHH", " ", ",", "T0", ",", "P0"}], "]"}], 
+        RowBox[{"QrotLin", "[", 
+         RowBox[{"MIHH", " ", ",", "T0", ",", "SigmaHH"}], "]"}], 
+        RowBox[{"Qvib", "[", 
+         RowBox[{"FreqHH", ",", "T0"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<Correct electronic partition function = \>\"", ",", 
+        RowBox[{"Qelec", "[", 
+         RowBox[{"ElectronicHH", " ", ",", "1", ",", "T0"}], "]"}]}], " ", 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GHH", "=", 
+       RowBox[{"GLin", "[", 
+        RowBox[{
+        "MHH", ",", "MIHH", ",", "SigmaHH", ",", "FreqHH", ",", 
+         "ElectronicHH", " ", ",", "1", ",", "T0", ",", "P0"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{
+       "\"\<Sanity check. Compare to G16 output. G thermal correction = \>\"",
+         ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"GHH", " ", "-", "ElectronicHH"}], " ", ")"}], "/", "h2j"}],
+         ",", " ", "\"\< hartree\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AHH", " ", "=", 
+       RowBox[{"ALin", "[", 
+        RowBox[{
+        "MHH", ",", "MIHH", ",", "SigmaHH", " ", ",", "FreqHH", " ", ",", 
+         "ElectronicHH", ",", "1", ",", "T0", ",", "P0"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"EHH", " ", "=", 
+       RowBox[{"EnLin", "[", 
+        RowBox[{"FreqHH", ",", "ElectronicHH", " ", ",", "T0"}], "]"}]}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"HHH", " ", "=", 
+       RowBox[{"HLin", "[", 
+        RowBox[{"FreqHH", ",", "ElectronicHH", " ", ",", "T0"}], "]"}]}], ";",
+       "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", "\"\<Molecule NN\>\"", "]"}], ";", 
+      RowBox[{"QNN", " ", "=", 
+       RowBox[{
+        RowBox[{"Qtran", "[", 
+         RowBox[{"MNN", " ", ",", "T0", ",", "P0"}], "]"}], 
+        RowBox[{"QrotLin", "[", 
+         RowBox[{"MINN", " ", ",", "T0", ",", "SigmaNN"}], "]"}], 
+        RowBox[{"Qvib", "[", 
+         RowBox[{"FreqNN", ",", "T0"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<Correct electronic partition function = \>\"", ",", 
+        RowBox[{"Qelec", "[", 
+         RowBox[{"ElectronicNN", " ", ",", "1", ",", "T0"}], "]"}]}], " ", 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"GNN", "=", 
+       RowBox[{"GLin", "[", 
+        RowBox[{
+        "MNN", ",", "MINN", ",", "SigmaNN", ",", "FreqNN", ",", 
+         "ElectronicNN", " ", ",", "1", ",", "T0", ",", "P0"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{
+       "\"\<Sanity check. Compare to G16 output. G thermal correction = \>\"",
+         ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"GNN", " ", "-", "Electronic"}], " ", ")"}], "/", "h2j"}], 
+        ",", " ", "\"\< hartree\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ANN", " ", "=", 
+       RowBox[{"ALin", "[", 
+        RowBox[{
+        "MNN", ",", "MINN", " ", ",", "SigmaNN", " ", ",", "FreqNN", " ", ",",
+          "ElectronicNN", ",", "1", ",", "T0", ",", "P0"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ENN", " ", "=", 
+       RowBox[{"EnLin", "[", 
+        RowBox[{"FreqNN", ",", "ElectronicNN", " ", ",", "T0"}], "]"}]}], ";",
+       "\[IndentingNewLine]", 
+      RowBox[{"HNN", " ", "=", 
+       RowBox[{"HLin", "[", 
+        RowBox[{"FreqNN", ",", "ElectronicNN", " ", ",", "T0"}], "]"}]}], ";",
+       "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{"Print", "[", "\"\<Transition state AH..BH..A\>\"", "]"}], ";", 
       
       RowBox[{"QTSAHdotBHdotA", " ", "=", 
@@ -2168,9 +2402,136 @@ Cell[BoxData[{
          RowBox[{"(", 
           RowBox[{
            SuperscriptBox["10", "3"], "*", "NA"}], ")"}]}], ",", 
-        "\"\< L * \!\(\*SuperscriptBox[\(mol\), \(-1\)]\)\>\""}], "]"}], ";", 
+        "\"\< mol * \!\(\*SuperscriptBox[\(L\), \(-1\)]\)\>\""}], "]"}], ";", 
       "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      StyleBox[
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "Thermodynamic", " ", "descriptors", " ", "of", " ", "the", " ", 
+         "reaction"}], " ", "*)"}],
+       FontSize->16,
+       Background->RGBColor[1, 0.9, 0.8]], 
+      StyleBox["\[IndentingNewLine]",
+       FontSize->16], "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+      "Print", "[", "\"\<Reaction 6, path 1 (R6P1): B <-> HH + NN\>\"", "]"}],
+       ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"The", " ", "electronic", " ", "energy"}], ",", " ", 
+        RowBox[{"J", "/", "mol"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"DeltaEelectronic", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+         "ElectronicHH", " ", "+", "ElectronicNN", "-", "ElectronicB"}], 
+         ")"}], "*", "NA"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"Internal", " ", "E"}], ",", " ", 
+        RowBox[{"J", "/", "mol"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"DeltaE", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"EHH", "+", "ENN", "-", "EB"}], ")"}], "*", "NA"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Enthalpy", " ", "change"}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"DeltaH", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"HHH", "+", "HNN", "-", "HB"}], ")"}], "*", "NA"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"Gibbs", " ", "FE"}], ",", " ", 
+        RowBox[{"J", "/", "mol"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"DeltaG", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"GHH", "+", "GNN", "-", "GB"}], ")"}], "*", "NA"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"Helmholtz", " ", "FE"}], ",", " ", 
+        RowBox[{"J", "/", "mol"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"DeltaA", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"AHH", "+", "ANN", "-", "AB"}], ")"}], "*", "NA"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", "\"\<Energy units are J/mol.\>\"", "]"}], ";", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<Delta E(elec) = \>\"", ",", "DeltaEelectronic"}], "]"}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<Delta E(intr) = \>\"", ",", "DeltaE"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<Delta H = \>\"", ",", "DeltaH"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<Delta A = \>\"", ",", "DeltaA"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<Delta G = \>\"", ",", "DeltaG"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", "\"\<Entropy units are J/mol/K.\>\"", "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<Delta S = \>\"", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"DeltaH", "-", "DeltaG"}], ")"}], "/", "T0"}]}], "]"}], ";",
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Neq1", " ", "=", " ", 
+       RowBox[{
+        FractionBox[
+         RowBox[{"QHH", " ", "QNN"}], "QB"], 
+        RowBox[{"Exp", "[", 
+         RowBox[{"-", 
+          FractionBox["DeltaEelectronic", 
+           RowBox[{"NA", " ", "kB", " ", "T0"}]]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<T- and p-dependent number constant = \>\"", ",", "Neq1"}],
+        "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{
+        "use", " ", "partition", " ", "functions", " ", "to", " ", "compute", 
+         " ", "the", " ", "P"}], "-", 
+        RowBox[{"indendent", " ", "equilibrium", " ", "costant"}]}], " ", 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"KeqR6P1", " ", "=", " ", 
+       RowBox[{
+        FractionBox[
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"QHH", "/", "V0"}], ")"}], " ", 
+          RowBox[{"(", 
+           RowBox[{"QNN", "/", "V0"}], ")"}]}], 
+         RowBox[{"QB", "/", "V0"}]], 
+        RowBox[{"Exp", "[", 
+         RowBox[{"-", 
+          FractionBox["DeltaEelectronic", 
+           RowBox[{"NA", " ", "kB", " ", "T0"}]]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{
+       "\"\<Use partition functions. Equilibrium constant = \>\"", ",", 
+        "KeqR6P1", ",", "\"\< \!\(\*SuperscriptBox[\(m\), \(-3\)]\) or \>\"", 
+        ",", 
+        RowBox[{"KeqR6P1", "/", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["10", "3"], "*", "NA"}], ")"}]}], ",", 
+        "\"\< mol * \!\(\*SuperscriptBox[\(L\), \(-1\)]\)\>\""}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
       StyleBox["\[IndentingNewLine]",
        FontSize->16], 
       StyleBox[
@@ -2721,7 +3082,12 @@ AAHH..B\>\"", "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]",
    3.769645494726617*^9}, {3.7696461440044537`*^9, 3.76964616475037*^9}, {
    3.7696462229484777`*^9, 3.76964626828539*^9}, {3.7696463023147917`*^9, 
    3.769646468854209*^9}, {3.769646550345621*^9, 3.769646962267717*^9}, {
-   3.7696473541087027`*^9, 3.769647378255123*^9}}],
+   3.7696473541087027`*^9, 3.769647378255123*^9}, {3.770057514073278*^9, 
+   3.770057550743498*^9}, {3.770057898325857*^9, 3.770057898868094*^9}, {
+   3.770057991092952*^9, 3.770057996907147*^9}, {3.770058090663661*^9, 
+   3.770058107734511*^9}, {3.770058201056251*^9, 3.770058384372703*^9}, {
+   3.770058414895068*^9, 3.770058703077812*^9}, {3.770058794309964*^9, 
+   3.7700589593093348`*^9}, {3.770059149863044*^9, 3.770059182480879*^9}}],
 
 Cell[CellGroupData[{
 
@@ -2739,7 +3105,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919115431*^9}],
 
 Cell[BoxData["\<\"====================\"\>"], "Print",
  CellChangeTimes->{
@@ -2755,7 +3122,8 @@ Cell[BoxData["\<\"====================\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473843597403`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191166115*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2778,7 +3146,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384367293*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191177616*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2799,7 +3168,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384376027*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191188692*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2821,7 +3191,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384384807*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191200057*^9}],
 
 Cell[BoxData["\<\"Molecule A\"\>"], "Print",
  CellChangeTimes->{
@@ -2837,7 +3208,8 @@ Cell[BoxData["\<\"Molecule A\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384392638*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191212235*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2861,7 +3233,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384400531*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191223432*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2885,7 +3258,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384408296*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191233779*^9}],
 
 Cell[BoxData["\<\"Molecule BH2\"\>"], "Print",
  CellChangeTimes->{
@@ -2901,7 +3275,8 @@ Cell[BoxData["\<\"Molecule BH2\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473844164467`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591912431793`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2925,7 +3300,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384424415*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191253921*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2949,7 +3325,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384432399*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591912655*^9}],
 
 Cell[BoxData["\<\"Molecule A..BH2\"\>"], "Print",
  CellChangeTimes->{
@@ -2965,7 +3342,8 @@ Cell[BoxData["\<\"Molecule A..BH2\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384440652*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919127661*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -2989,7 +3367,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473844484587`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191289153*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3013,7 +3392,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384456245*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191299265*^9}],
 
 Cell[BoxData["\<\"Molecule A..BH2..A\"\>"], "Print",
  CellChangeTimes->{
@@ -3029,7 +3409,8 @@ Cell[BoxData["\<\"Molecule A..BH2..A\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384462592*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591913067837`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3053,7 +3434,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.76964738446889*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919131446*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3077,7 +3459,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473844752398`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591913228807`*^9}],
 
 Cell[BoxData["\<\"Molecule AAHH\"\>"], "Print",
  CellChangeTimes->{
@@ -3093,7 +3476,8 @@ Cell[BoxData["\<\"Molecule AAHH\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384482772*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191330365*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3117,7 +3501,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384490863*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191339671*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3141,7 +3526,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384498811*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191349607*^9}],
 
 Cell[BoxData["\<\"Molecule B\"\>"], "Print",
  CellChangeTimes->{
@@ -3157,7 +3543,8 @@ Cell[BoxData["\<\"Molecule B\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.76964738450671*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191358708*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3181,7 +3568,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.76964738451434*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591913677998`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3205,7 +3593,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384522134*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191377376*^9}],
 
 Cell[BoxData["\<\"Molecule AH..BH\"\>"], "Print",
  CellChangeTimes->{
@@ -3221,7 +3610,8 @@ Cell[BoxData["\<\"Molecule AH..BH\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384528986*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191386653*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3245,7 +3635,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384536626*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591913964863`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3269,7 +3660,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384544552*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191404015*^9}],
 
 Cell[BoxData["\<\"Molecule AAHH..B\"\>"], "Print",
  CellChangeTimes->{
@@ -3285,7 +3677,8 @@ Cell[BoxData["\<\"Molecule AAHH..B\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473845522833`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591914115*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3309,7 +3702,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384559825*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591914191523`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3333,7 +3727,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384567665*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191426631*^9}],
 
 Cell[BoxData["\<\"Molecule AH..BH..A\"\>"], "Print",
  CellChangeTimes->{
@@ -3349,7 +3744,8 @@ Cell[BoxData["\<\"Molecule AH..BH..A\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473845749493`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191434643*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3373,7 +3769,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384582527*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919144304*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3397,7 +3794,147 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384590076*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191450872*^9}],
+
+Cell[BoxData["\<\"Molecule HH\"\>"], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191457757*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Correct electronic partition function = \"\>", 
+   "\[InvisibleSpace]", 
+   "1.41300921676258461419572208689578694097988`12.853377307072128*^542"}],
+  SequenceForm[
+  "Correct electronic partition function = ", 
+   1.41300921676258461419572208689578694097988`12.853377307072128*^542],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191464162*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Sanity check. Compare to G16 output. G thermal correction = \"\
+\>", "\[InvisibleSpace]", "0.0016885400135295996`", 
+   "\[InvisibleSpace]", "\<\" hartree\"\>"}],
+  SequenceForm[
+  "Sanity check. Compare to G16 output. G thermal correction = ", 
+   0.0016885400135295996`, " hartree"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191470676*^9}],
+
+Cell[BoxData["\<\"Molecule NN\"\>"], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191476676*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Correct electronic partition function = \"\>", 
+   "\[InvisibleSpace]", 
+   "5.03622260516798240778642570758680137`10.890135727498045*^50377"}],
+  SequenceForm[
+  "Correct electronic partition function = ", 
+   5.03622260516798240778642570758680137`10.890135727498045*^50377],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191483611*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Sanity check. Compare to G16 output. G thermal correction = \"\
+\>", "\[InvisibleSpace]", 
+   RowBox[{"2.293714762806956`*^17", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "4.775413239510201`*^-16"}], "-", "Electronic"}], ")"}]}], 
+   "\[InvisibleSpace]", "\<\" hartree\"\>"}],
+  SequenceForm[
+  "Sanity check. Compare to G16 output. G thermal correction = ", 
+   2.293714762806956*^17 (-4.775413239510201*^-16 - $CellContext`Electronic), 
+   " hartree"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919149084*^9}],
 
 Cell[BoxData["\<\"Transition state AH..BH..A\"\>"], "Print",
  CellChangeTimes->{
@@ -3413,7 +3950,8 @@ Cell[BoxData["\<\"Transition state AH..BH..A\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384597807*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191540885*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3438,7 +3976,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384605706*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191549253*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3462,7 +4001,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384613284*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591915572166`*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -3478,7 +4018,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473846213007`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591915650873`*^9}],
 
 Cell[BoxData["\<\"Reaction 1, path 1 (R1P1): A + BH2 <-> A..BH2\"\>"], "Print",
  CellChangeTimes->{
@@ -3494,7 +4035,8 @@ Cell[BoxData["\<\"Reaction 1, path 1 (R1P1): A + BH2 <-> A..BH2\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473846284647`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591915736713`*^9}],
 
 Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
  CellChangeTimes->{
@@ -3510,7 +4052,8 @@ Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473846350107`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191581213*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3531,7 +4074,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384641369*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191589172*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3552,7 +4096,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473846477013`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591915982513`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3573,7 +4118,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384654117*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191606309*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3593,7 +4139,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384660396*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191613968*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3613,7 +4160,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473846667347`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191621667*^9}],
 
 Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
  CellChangeTimes->{
@@ -3629,7 +4177,8 @@ Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473846733017`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191629229*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3650,7 +4199,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473846798077`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191637032*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3671,7 +4221,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473847426443`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191644355*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3699,7 +4250,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473847510653`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191651977*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -3715,7 +4267,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384759194*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591916598186`*^9}],
 
 Cell[BoxData["\<\"Reaction 2, path 1 (R2P1): A..BH2 <-> AH..BH\"\>"], "Print",
  CellChangeTimes->{
@@ -3731,7 +4284,8 @@ Cell[BoxData["\<\"Reaction 2, path 1 (R2P1): A..BH2 <-> AH..BH\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384766007*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591916678143`*^9}],
 
 Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
  CellChangeTimes->{
@@ -3747,7 +4301,8 @@ Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.76964738477242*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191676388*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3768,7 +4323,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384779048*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191688259*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3789,7 +4345,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473847863493`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191697309*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3809,7 +4366,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384794403*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191707765*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3829,7 +4387,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384802253*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191716984*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3849,7 +4408,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384809844*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191725025*^9}],
 
 Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
  CellChangeTimes->{
@@ -3865,7 +4425,8 @@ Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473848175173`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191732993*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3886,7 +4447,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384824313*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191740673*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3908,7 +4470,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384830748*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591917491407`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3931,7 +4494,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384837509*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591917578573`*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -3947,7 +4511,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473848454*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191766203*^9}],
 
 Cell[BoxData["\<\"Reaction 3, path 1 (R3P1): AH..BH + A <-> AH..BH..A\"\>"], \
 "Print",
@@ -3964,7 +4529,8 @@ Cell[BoxData["\<\"Reaction 3, path 1 (R3P1): AH..BH + A <-> AH..BH..A\"\>"], \
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384854108*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919177413*^9}],
 
 Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
  CellChangeTimes->{
@@ -3980,7 +4546,8 @@ Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384861712*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191781929*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4001,7 +4568,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.76964738486985*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191790169*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4022,7 +4590,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473848781233`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591917987347`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4043,7 +4612,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473848854523`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191806614*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4063,7 +4633,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384892146*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191814705*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4084,7 +4655,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384899125*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191822723*^9}],
 
 Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
  CellChangeTimes->{
@@ -4100,7 +4672,8 @@ Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473849060087`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191830339*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4121,7 +4694,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473849138737`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191839025*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4142,7 +4716,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384921855*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191846891*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4170,7 +4745,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384929707*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191855932*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -4186,7 +4762,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384937336*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919186392*^9}],
 
 Cell[BoxData["\<\"Reaction 4, path 1 (R4P1): AH..BH..A <-> AAHH..B\"\>"], \
 "Print",
@@ -4203,7 +4780,8 @@ Cell[BoxData["\<\"Reaction 4, path 1 (R4P1): AH..BH..A <-> AAHH..B\"\>"], \
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473849448442`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191873859*^9}],
 
 Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
  CellChangeTimes->{
@@ -4219,7 +4797,8 @@ Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384952544*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191882578*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4240,7 +4819,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473849604883`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591919257507`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4261,7 +4841,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384968734*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191934724*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4282,7 +4863,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384976263*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191942828*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4303,7 +4885,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473849843693`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191951124*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4324,7 +4907,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384992551*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191959223*^9}],
 
 Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
  CellChangeTimes->{
@@ -4340,7 +4924,8 @@ Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473850007477`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919196774*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4361,7 +4946,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385008584*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191976007*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4382,7 +4968,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385016275*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059191984213*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4404,7 +4991,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473850245657`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591919929028`*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -4420,7 +5008,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385032748*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192003441*^9}],
 
 Cell[BoxData["\<\"Reaction 5, path 1 (R5P1): AAHH..B <-> AAHH + B\"\>"], \
 "Print",
@@ -4437,7 +5026,8 @@ Cell[BoxData["\<\"Reaction 5, path 1 (R5P1): AAHH..B <-> AAHH + B\"\>"], \
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385040772*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192012465*^9}],
 
 Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
  CellChangeTimes->{
@@ -4453,7 +5043,8 @@ Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385049129*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192020653*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4474,7 +5065,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385057042*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192028613*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4495,7 +5087,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473850652113`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591920366507`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4515,7 +5108,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385073176*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192044961*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4535,7 +5129,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385081419*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591920536623`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4555,7 +5150,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385128276*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591920611362`*^9}],
 
 Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
  CellChangeTimes->{
@@ -4571,7 +5167,8 @@ Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385137224*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192070134*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4591,14 +5188,14 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385145043*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192078887*^9}],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"T- and p-dependent number constant = \"\>", 
-   "\[InvisibleSpace]", "0.18397465033561872`"}],
-  SequenceForm["T- and p-dependent number constant = ", 0.18397465033561872`],
-  
+   "\[InvisibleSpace]", "0.09198732516780936`"}],
+  SequenceForm["T- and p-dependent number constant = ", 0.09198732516780936],
   Editable->False]], "Print",
  CellChangeTimes->{
   3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
@@ -4613,20 +5210,21 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385151751*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192087276*^9}],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Use partition functions. Equilibrium constant = \"\>", 
-   "\[InvisibleSpace]", "1.107921258438418`*^26", 
+   "\[InvisibleSpace]", "5.53960629219209`*^25", 
    "\[InvisibleSpace]", "\<\" \\!\\(\\*SuperscriptBox[\\(m\\), \\(-3\\)]\\) \
-or \"\>", "\[InvisibleSpace]", "0.1839746503356187`", 
-   "\[InvisibleSpace]", "\<\" L * \\!\\(\\*SuperscriptBox[\\(mol\\), \
+or \"\>", "\[InvisibleSpace]", "0.09198732516780934`", 
+   "\[InvisibleSpace]", "\<\" mol * \\!\\(\\*SuperscriptBox[\\(L\\), \
 \\(-1\\)]\\)\"\>"}],
   SequenceForm[
-  "Use partition functions. Equilibrium constant = ", 1.107921258438418*^26, 
-   " \!\(\*SuperscriptBox[\(m\), \(-3\)]\) or ", 0.1839746503356187, 
-   " L * \!\(\*SuperscriptBox[\(mol\), \(-1\)]\)"],
+  "Use partition functions. Equilibrium constant = ", 5.53960629219209*^25, 
+   " \!\(\*SuperscriptBox[\(m\), \(-3\)]\) or ", 0.09198732516780934, 
+   " mol * \!\(\*SuperscriptBox[\(L\), \(-1\)]\)"],
   Editable->False]], "Print",
  CellChangeTimes->{
   3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
@@ -4641,7 +5239,8 @@ or \"\>", "\[InvisibleSpace]", "0.1839746503356187`",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385158504*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192094993*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -4657,7 +5256,259 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385166524*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591921415253`*^9}],
+
+Cell[BoxData["\<\"Reaction 6, path 1 (R6P1): B <-> HH + NN\"\>"], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591921508493`*^9}],
+
+Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192159593*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Delta E(elec) = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "146429.53179681307`"}]}],
+  SequenceForm["Delta E(elec) = ", -146429.53179681307`],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192168005*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Delta E(intr) = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "174695.88588283738`"}]}],
+  SequenceForm["Delta E(intr) = ", -174695.88588283738`],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591921762037`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Delta H = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "172216.9296751501`"}]}],
+  SequenceForm["Delta H = ", -172216.9296751501],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192184733*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Delta A = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "197695.42706939095`"}]}],
+  SequenceForm["Delta A = ", -197695.42706939095`],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591921929207`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Delta G = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "195216.47086170368`"}]}],
+  SequenceForm["Delta G = ", -195216.47086170368`],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192201394*^9}],
+
+Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591922098846`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Delta S = \"\>", "\[InvisibleSpace]", "77.14083912981242`"}],
+  SequenceForm["Delta S = ", 77.14083912981242],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192218649*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"T- and p-dependent number constant = \"\>", 
+   "\[InvisibleSpace]", "1.5865631293200117`*^34"}],
+  SequenceForm[
+  "T- and p-dependent number constant = ", 1.5865631293200117`*^34],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192226779*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Use partition functions. Equilibrium constant = \"\>", 
+   "\[InvisibleSpace]", "9.554506643287815`*^60", 
+   "\[InvisibleSpace]", "\<\" \\!\\(\\*SuperscriptBox[\\(m\\), \\(-3\\)]\\) \
+or \"\>", "\[InvisibleSpace]", "1.5865631293200112`*^34", 
+   "\[InvisibleSpace]", "\<\" mol * \\!\\(\\*SuperscriptBox[\\(L\\), \
+\\(-1\\)]\\)\"\>"}],
+  SequenceForm[
+  "Use partition functions. Equilibrium constant = ", 9.554506643287815*^60, 
+   " \!\(\*SuperscriptBox[\(m\), \(-3\)]\) or ", 1.5865631293200112`*^34, 
+   " mol * \!\(\*SuperscriptBox[\(L\), \(-1\)]\)"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192235531*^9}],
+
+Cell[BoxData["\<\"\"\>"], "Print",
+ CellChangeTimes->{
+  3.763031937783354*^9, 3.7630331020638027`*^9, 3.76303326276267*^9, 
+   3.763033521707224*^9, {3.7655791434306393`*^9, 3.765579161588291*^9}, 
+   3.765579461595455*^9, 3.7655796285042133`*^9, 3.765579757480451*^9, {
+   3.765579848650195*^9, 3.7655798586208677`*^9}, 3.7694663203556232`*^9, 
+   3.769466368439724*^9, 3.769466607199613*^9, 3.769466659337819*^9, 
+   3.769467022721327*^9, {3.769474807298067*^9, 3.769474827260968*^9}, 
+   3.769503778192863*^9, 3.7695066767804613`*^9, 3.7695271775237207`*^9, 
+   3.7695275138263702`*^9, 3.769531328749951*^9, 3.769531386699259*^9, 
+   3.769531522201562*^9, 3.76953161212743*^9, 3.7695316860690002`*^9, 
+   3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
+   3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
+   3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192244034*^9}],
 
 Cell[BoxData["\<\"Reaction 1, path 2 (R1P2): 2A + BH2 <-> A..BH2..A\"\>"], \
 "Print",
@@ -4674,7 +5525,8 @@ Cell[BoxData["\<\"Reaction 1, path 2 (R1P2): 2A + BH2 <-> A..BH2..A\"\>"], \
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385174798*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919225214*^9}],
 
 Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
  CellChangeTimes->{
@@ -4690,7 +5542,8 @@ Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.76964738518272*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591922606163`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4711,7 +5564,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473851910057`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192269332*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4732,7 +5586,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473851994057`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192276885*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4753,7 +5608,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385207892*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591922847347`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4773,7 +5629,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385216139*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591922925053`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4793,7 +5650,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385224318*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192300683*^9}],
 
 Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
  CellChangeTimes->{
@@ -4809,7 +5667,8 @@ Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385232333*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192309246*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4830,7 +5689,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385240942*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192317747*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4851,7 +5711,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385248341*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919232553*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4880,7 +5741,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473852553797`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192334062*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -4896,7 +5758,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385263527*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192342018*^9}],
 
 Cell[BoxData["\<\"Reaction 2, path 2 (R2P2): A..BH2..A <-> AH..BH..A\"\>"], \
 "Print",
@@ -4913,7 +5776,8 @@ Cell[BoxData["\<\"Reaction 2, path 2 (R2P2): A..BH2..A <-> AH..BH..A\"\>"], \
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385271628*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192350339*^9}],
 
 Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
  CellChangeTimes->{
@@ -4929,7 +5793,8 @@ Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385279483*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192358478*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4950,7 +5815,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473852876787`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591923663073`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4971,7 +5837,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385327829*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192374381*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -4991,7 +5858,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385336933*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192382749*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5011,7 +5879,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385345022*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192391732*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5031,7 +5900,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385352845*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591924004793`*^9}],
 
 Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
  CellChangeTimes->{
@@ -5047,7 +5917,8 @@ Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385360898*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192408287*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5068,7 +5939,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.76964738537066*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919241693*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5090,7 +5962,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385379994*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591924247427`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5113,7 +5986,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473853882027`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192433394*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -5129,7 +6003,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385396125*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192441493*^9}],
 
 Cell[BoxData["\<\"Reaction 3, path 2 (R2P2): see Reaction 4, path 1\"\>"], \
 "Print",
@@ -5146,7 +6021,8 @@ Cell[BoxData["\<\"Reaction 3, path 2 (R2P2): see Reaction 4, path 1\"\>"], \
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385404221*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192449341*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -5162,7 +6038,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473854111137`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192457592*^9}],
 
 Cell[BoxData["\<\"Reaction 4, path 2 (R2P2): see Reaction 5, path 1\"\>"], \
 "Print",
@@ -5179,7 +6056,8 @@ Cell[BoxData["\<\"Reaction 4, path 2 (R2P2): see Reaction 5, path 1\"\>"], \
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385418027*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192465657*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -5195,7 +6073,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473854247417`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591924742727`*^9}],
 
 Cell[BoxData["\<\"Transition state for Reaction 4, path 1 (R4P1): AH..BH..A \
 <-> AAHH..B\"\>"], "Print",
@@ -5212,7 +6091,8 @@ Cell[BoxData["\<\"Transition state for Reaction 4, path 1 (R4P1): AH..BH..A \
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385431258*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192481956*^9}],
 
 Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
  CellChangeTimes->{
@@ -5228,7 +6108,8 @@ Cell[BoxData["\<\"Energy units are J/mol.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385438281*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919249041*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5249,7 +6130,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385444998*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192498108*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5270,7 +6152,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.76964738545173*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192597925*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5291,7 +6174,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385458469*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591926067867`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5312,7 +6196,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385465369*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192615491*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5333,7 +6218,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385473444*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192623773*^9}],
 
 Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
  CellChangeTimes->{
@@ -5349,7 +6235,8 @@ Cell[BoxData["\<\"Entropy units are J/mol/K.\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385480929*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.77005919263337*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5370,7 +6257,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385487705*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591926418467`*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5394,7 +6282,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.7696473854950247`*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192650473*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5418,7 +6307,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385503211*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.7700591926585197`*^9}],
 
 Cell[BoxData["\<\"\"\>"], "Print",
  CellChangeTimes->{
@@ -5434,7 +6324,8 @@ Cell[BoxData["\<\"\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385511805*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192666798*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -5456,7 +6347,8 @@ Cell[BoxData[
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385519828*^9}],
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192674828*^9}],
 
 Cell[BoxData["\<\"====================\"\>"], "Print",
  CellChangeTimes->{
@@ -5472,7 +6364,8 @@ Cell[BoxData["\<\"====================\"\>"], "Print",
    3.769532080803319*^9, 3.769532731321156*^9, 3.769561661773576*^9, 
    3.769561736615615*^9, 3.769562250404552*^9, 3.7696273408644037`*^9, 
    3.769642727537182*^9, 3.76964550201339*^9, 3.76964647418944*^9, 
-   3.769646802219494*^9, 3.769646969488016*^9, 3.769647385527741*^9}]
+   3.769646802219494*^9, 3.769646969488016*^9, 3.769647384350412*^9, 
+   3.770058974468893*^9, 3.770059192687236*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -5865,176 +6758,196 @@ Notebook[{
 Cell[558, 20, 924, 20, 93, "Input"],
 Cell[1485, 42, 346, 6, 63, "Input"],
 Cell[1834, 50, 3779, 99, 284, "Input"],
-Cell[5616, 151, 10857, 265, 741, "Input"],
+Cell[5616, 151, 13867, 345, 939, "Input"],
 Cell[CellGroupData[{
-Cell[16498, 420, 27647, 526, 3294, "Input"],
+Cell[19508, 500, 29524, 579, 3566, "Input"],
 Cell[CellGroupData[{
-Cell[44170, 950, 326, 5, 21, "Print"],
-Cell[44499, 957, 328, 5, 21, "Print"],
-Cell[44830, 964, 333, 5, 21, "Print"],
-Cell[45166, 971, 334, 5, 21, "Print"],
-Cell[45503, 978, 329, 5, 21, "Print"],
-Cell[45835, 985, 326, 5, 21, "Print"],
-Cell[46164, 992, 333, 5, 21, "Print"],
-Cell[46500, 999, 334, 5, 21, "Print"],
-Cell[46837, 1006, 332, 5, 21, "Print"],
-Cell[47172, 1013, 342, 5, 21, "Print"]
+Cell[49057, 1083, 348, 5, 21, "Print"],
+Cell[49408, 1090, 350, 5, 21, "Print"],
+Cell[49761, 1097, 353, 5, 21, "Print"],
+Cell[50117, 1104, 356, 5, 21, "Print"],
+Cell[50476, 1111, 351, 5, 21, "Print"],
+Cell[50830, 1118, 348, 5, 21, "Print"],
+Cell[51181, 1125, 353, 5, 21, "Print"],
+Cell[51537, 1132, 356, 5, 21, "Print"],
+Cell[51896, 1139, 356, 5, 21, "Print"],
+Cell[52255, 1146, 349, 5, 21, "Print"],
+Cell[52607, 1153, 349, 5, 21, "Print"],
+Cell[52959, 1160, 363, 5, 21, "Print"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[47563, 1024, 74859, 1699, 8450, "Input"],
+Cell[53371, 1171, 84348, 1918, 9511, "Input"],
 Cell[CellGroupData[{
-Cell[122447, 2727, 985, 14, 21, "Print"],
-Cell[123435, 2743, 1007, 14, 21, "Print"],
-Cell[124445, 2759, 1306, 21, 22, "Print"],
-Cell[125754, 2782, 1214, 19, 22, "Print"],
-Cell[126971, 2803, 1212, 20, 24, "Print"],
-Cell[128186, 2825, 995, 14, 21, "Print"],
-Cell[129184, 2841, 1314, 22, 24, "Print"],
-Cell[130501, 2865, 1311, 22, 22, "Print"],
-Cell[131815, 2889, 999, 14, 21, "Print"],
-Cell[132817, 2905, 1312, 22, 24, "Print"],
-Cell[134132, 2929, 1310, 22, 22, "Print"],
-Cell[135445, 2953, 1000, 14, 21, "Print"],
-Cell[136448, 2969, 1324, 22, 24, "Print"],
-Cell[137775, 2993, 1311, 22, 22, "Print"],
-Cell[139089, 3017, 1003, 14, 21, "Print"],
-Cell[140095, 3033, 1299, 22, 24, "Print"],
-Cell[141397, 3057, 1310, 22, 22, "Print"],
-Cell[142710, 3081, 998, 14, 21, "Print"],
-Cell[143711, 3097, 1304, 22, 24, "Print"],
-Cell[145018, 3121, 1311, 22, 22, "Print"],
-Cell[146332, 3145, 994, 14, 21, "Print"],
-Cell[147329, 3161, 1299, 22, 24, "Print"],
-Cell[148631, 3185, 1310, 22, 22, "Print"],
-Cell[149944, 3209, 1000, 14, 21, "Print"],
-Cell[150947, 3225, 1302, 22, 24, "Print"],
-Cell[152252, 3249, 1311, 22, 22, "Print"],
-Cell[153566, 3273, 1003, 14, 21, "Print"],
-Cell[154572, 3289, 1306, 22, 24, "Print"],
-Cell[155881, 3313, 1311, 22, 22, "Print"],
-Cell[157195, 3337, 1005, 14, 21, "Print"],
-Cell[158203, 3353, 1318, 22, 24, "Print"],
-Cell[159524, 3377, 1311, 22, 22, "Print"],
-Cell[160838, 3401, 1011, 14, 21, "Print"],
-Cell[161852, 3417, 1326, 23, 24, "Print"],
-Cell[163181, 3442, 1311, 22, 22, "Print"],
-Cell[164495, 3466, 987, 14, 21, "Print"],
-Cell[165485, 3482, 1032, 14, 22, "Print"],
-Cell[166520, 3498, 1010, 14, 22, "Print"],
-Cell[167533, 3514, 1175, 19, 21, "Print"],
-Cell[168711, 3535, 1177, 19, 21, "Print"],
-Cell[169891, 3556, 1163, 19, 21, "Print"],
-Cell[171057, 3577, 1143, 18, 21, "Print"],
-Cell[172203, 3597, 1142, 18, 21, "Print"],
-Cell[173348, 3617, 1013, 14, 22, "Print"],
-Cell[174364, 3633, 1162, 19, 21, "Print"],
-Cell[175529, 3654, 1207, 19, 22, "Print"],
-Cell[176739, 3675, 1587, 26, 24, "Print"],
-Cell[178329, 3703, 985, 14, 21, "Print"],
-Cell[179317, 3719, 1029, 14, 22, "Print"],
-Cell[180349, 3735, 1007, 14, 22, "Print"],
-Cell[181359, 3751, 1159, 19, 21, "Print"],
-Cell[182521, 3772, 1161, 19, 21, "Print"],
-Cell[183685, 3793, 1143, 18, 21, "Print"],
-Cell[184831, 3813, 1143, 18, 21, "Print"],
-Cell[185977, 3833, 1143, 18, 21, "Print"],
-Cell[187123, 3853, 1013, 14, 22, "Print"],
-Cell[188139, 3869, 1163, 19, 21, "Print"],
-Cell[189305, 3890, 1211, 20, 24, "Print"],
-Cell[190519, 3912, 1236, 21, 24, "Print"],
-Cell[191758, 3935, 983, 14, 21, "Print"],
-Cell[192744, 3951, 1038, 15, 22, "Print"],
-Cell[193785, 3968, 1008, 14, 22, "Print"],
-Cell[194796, 3984, 1167, 19, 21, "Print"],
-Cell[195966, 4005, 1174, 19, 21, "Print"],
-Cell[197143, 4026, 1165, 19, 21, "Print"],
-Cell[198311, 4047, 1140, 18, 21, "Print"],
-Cell[199454, 4067, 1163, 19, 21, "Print"],
-Cell[200620, 4088, 1013, 14, 22, "Print"],
-Cell[201636, 4104, 1162, 19, 21, "Print"],
-Cell[202801, 4125, 1201, 19, 22, "Print"],
-Cell[204005, 4146, 1581, 26, 24, "Print"],
-Cell[205589, 4174, 985, 14, 21, "Print"],
-Cell[206577, 4190, 1037, 15, 22, "Print"],
-Cell[207617, 4207, 1008, 14, 22, "Print"],
-Cell[208628, 4223, 1174, 19, 21, "Print"],
-Cell[209805, 4244, 1172, 19, 21, "Print"],
-Cell[210980, 4265, 1160, 19, 21, "Print"],
-Cell[212143, 4286, 1165, 19, 21, "Print"],
-Cell[213311, 4307, 1163, 19, 21, "Print"],
-Cell[214477, 4328, 1013, 14, 22, "Print"],
-Cell[215493, 4344, 1160, 19, 21, "Print"],
-Cell[216656, 4365, 1206, 19, 24, "Print"],
-Cell[217865, 4386, 1233, 20, 24, "Print"],
-Cell[219101, 4408, 985, 14, 21, "Print"],
-Cell[220089, 4424, 1034, 15, 22, "Print"],
-Cell[221126, 4441, 1008, 14, 22, "Print"],
-Cell[222137, 4457, 1156, 19, 21, "Print"],
-Cell[223296, 4478, 1161, 19, 21, "Print"],
-Cell[224460, 4499, 1140, 18, 21, "Print"],
-Cell[225603, 4519, 1143, 18, 21, "Print"],
-Cell[226749, 4539, 1140, 18, 21, "Print"],
-Cell[227892, 4559, 1011, 14, 22, "Print"],
-Cell[228906, 4575, 1140, 18, 21, "Print"],
-Cell[230049, 4595, 1206, 20, 22, "Print"],
-Cell[231258, 4617, 1577, 26, 24, "Print"],
-Cell[232838, 4645, 985, 14, 21, "Print"],
-Cell[233826, 4661, 1036, 15, 22, "Print"],
-Cell[234865, 4678, 1007, 14, 22, "Print"],
-Cell[235875, 4694, 1174, 19, 21, "Print"],
-Cell[237052, 4715, 1174, 19, 21, "Print"],
-Cell[238229, 4736, 1160, 19, 21, "Print"],
-Cell[239392, 4757, 1140, 18, 21, "Print"],
-Cell[240535, 4777, 1138, 18, 21, "Print"],
-Cell[241676, 4797, 1011, 14, 22, "Print"],
-Cell[242690, 4813, 1160, 19, 21, "Print"],
-Cell[243853, 4834, 1200, 19, 22, "Print"],
-Cell[245056, 4855, 1660, 27, 24, "Print"],
-Cell[246719, 4884, 985, 14, 21, "Print"],
-Cell[247707, 4900, 1037, 15, 22, "Print"],
-Cell[248747, 4917, 1008, 14, 22, "Print"],
-Cell[249758, 4933, 1161, 19, 21, "Print"],
-Cell[250922, 4954, 1159, 19, 21, "Print"],
-Cell[252084, 4975, 1143, 18, 21, "Print"],
-Cell[253230, 4995, 1140, 18, 21, "Print"],
-Cell[254373, 5015, 1140, 18, 21, "Print"],
-Cell[255516, 5035, 1011, 14, 22, "Print"],
-Cell[256530, 5051, 1162, 19, 21, "Print"],
-Cell[257695, 5072, 1214, 20, 24, "Print"],
-Cell[258912, 5094, 1238, 21, 24, "Print"],
-Cell[260153, 5117, 985, 14, 21, "Print"],
-Cell[261141, 5133, 1036, 15, 22, "Print"],
-Cell[262180, 5150, 987, 14, 21, "Print"],
-Cell[263170, 5166, 1036, 15, 22, "Print"],
-Cell[264209, 5183, 987, 14, 21, "Print"],
-Cell[265199, 5199, 1056, 15, 22, "Print"],
-Cell[266258, 5216, 1008, 14, 22, "Print"],
-Cell[267269, 5232, 1166, 19, 21, "Print"],
-Cell[268438, 5253, 1165, 19, 21, "Print"],
-Cell[269606, 5274, 1154, 19, 21, "Print"],
-Cell[270763, 5295, 1154, 19, 21, "Print"],
-Cell[271920, 5316, 1154, 19, 21, "Print"],
-Cell[273077, 5337, 1011, 14, 22, "Print"],
-Cell[274091, 5353, 1170, 19, 21, "Print"],
-Cell[275264, 5374, 1281, 22, 22, "Print"],
-Cell[276548, 5398, 1282, 22, 22, "Print"],
-Cell[277833, 5422, 985, 14, 21, "Print"],
-Cell[278821, 5438, 1250, 20, 22, "Print"],
-Cell[280074, 5460, 1005, 14, 21, "Print"]
+Cell[137744, 3093, 1032, 15, 21, "Print"],
+Cell[138779, 3110, 1053, 15, 21, "Print"],
+Cell[139835, 3127, 1354, 22, 22, "Print"],
+Cell[141192, 3151, 1262, 20, 22, "Print"],
+Cell[142457, 3173, 1260, 21, 24, "Print"],
+Cell[143720, 3196, 1043, 15, 21, "Print"],
+Cell[144766, 3213, 1362, 23, 24, "Print"],
+Cell[146131, 3238, 1359, 23, 22, "Print"],
+Cell[147493, 3263, 1047, 15, 21, "Print"],
+Cell[148543, 3280, 1360, 23, 24, "Print"],
+Cell[149906, 3305, 1356, 23, 22, "Print"],
+Cell[151265, 3330, 1047, 15, 21, "Print"],
+Cell[152315, 3347, 1370, 23, 24, "Print"],
+Cell[153688, 3372, 1359, 23, 22, "Print"],
+Cell[155050, 3397, 1053, 15, 21, "Print"],
+Cell[156106, 3414, 1347, 23, 24, "Print"],
+Cell[157456, 3439, 1358, 23, 22, "Print"],
+Cell[158817, 3464, 1046, 15, 21, "Print"],
+Cell[159866, 3481, 1352, 23, 24, "Print"],
+Cell[161221, 3506, 1359, 23, 22, "Print"],
+Cell[162583, 3531, 1043, 15, 21, "Print"],
+Cell[163629, 3548, 1350, 23, 24, "Print"],
+Cell[164982, 3573, 1358, 23, 22, "Print"],
+Cell[166343, 3598, 1048, 15, 21, "Print"],
+Cell[167394, 3615, 1352, 23, 24, "Print"],
+Cell[168749, 3640, 1359, 23, 22, "Print"],
+Cell[170111, 3665, 1047, 15, 21, "Print"],
+Cell[171161, 3682, 1356, 23, 24, "Print"],
+Cell[172520, 3707, 1359, 23, 22, "Print"],
+Cell[173882, 3732, 1051, 15, 21, "Print"],
+Cell[174936, 3749, 1365, 23, 24, "Print"],
+Cell[176304, 3774, 1359, 23, 22, "Print"],
+Cell[177666, 3799, 1044, 15, 21, "Print"],
+Cell[178713, 3816, 1362, 23, 24, "Print"],
+Cell[180078, 3841, 1363, 23, 22, "Print"],
+Cell[181444, 3866, 1044, 15, 21, "Print"],
+Cell[182491, 3883, 1354, 23, 24, "Print"],
+Cell[183848, 3908, 1545, 28, 42, "Print"],
+Cell[185396, 3938, 1059, 15, 21, "Print"],
+Cell[186458, 3955, 1374, 24, 24, "Print"],
+Cell[187835, 3981, 1361, 23, 22, "Print"],
+Cell[189199, 4006, 1035, 15, 21, "Print"],
+Cell[190237, 4023, 1080, 15, 22, "Print"],
+Cell[191320, 4040, 1056, 15, 22, "Print"],
+Cell[192379, 4057, 1223, 20, 21, "Print"],
+Cell[193605, 4079, 1225, 20, 21, "Print"],
+Cell[194833, 4101, 1211, 20, 21, "Print"],
+Cell[196047, 4123, 1191, 19, 21, "Print"],
+Cell[197241, 4144, 1188, 19, 21, "Print"],
+Cell[198432, 4165, 1059, 15, 22, "Print"],
+Cell[199494, 4182, 1208, 20, 21, "Print"],
+Cell[200705, 4204, 1253, 20, 22, "Print"],
+Cell[201961, 4226, 1633, 27, 24, "Print"],
+Cell[203597, 4255, 1035, 15, 21, "Print"],
+Cell[204635, 4272, 1079, 15, 22, "Print"],
+Cell[205717, 4289, 1056, 15, 22, "Print"],
+Cell[206776, 4306, 1207, 20, 21, "Print"],
+Cell[207986, 4328, 1207, 20, 21, "Print"],
+Cell[209196, 4350, 1191, 19, 21, "Print"],
+Cell[210390, 4371, 1191, 19, 21, "Print"],
+Cell[211584, 4392, 1191, 19, 21, "Print"],
+Cell[212778, 4413, 1059, 15, 22, "Print"],
+Cell[213840, 4430, 1211, 20, 21, "Print"],
+Cell[215054, 4452, 1261, 21, 24, "Print"],
+Cell[216318, 4475, 1286, 22, 24, "Print"],
+Cell[217607, 4499, 1033, 15, 21, "Print"],
+Cell[218643, 4516, 1085, 16, 22, "Print"],
+Cell[219731, 4534, 1056, 15, 22, "Print"],
+Cell[220790, 4551, 1216, 20, 21, "Print"],
+Cell[222009, 4573, 1222, 20, 21, "Print"],
+Cell[223234, 4595, 1211, 20, 21, "Print"],
+Cell[224448, 4617, 1188, 19, 21, "Print"],
+Cell[225639, 4638, 1211, 20, 21, "Print"],
+Cell[226853, 4660, 1059, 15, 22, "Print"],
+Cell[227915, 4677, 1208, 20, 21, "Print"],
+Cell[229126, 4699, 1249, 20, 22, "Print"],
+Cell[230378, 4721, 1629, 27, 24, "Print"],
+Cell[232010, 4750, 1032, 15, 21, "Print"],
+Cell[233045, 4767, 1083, 16, 22, "Print"],
+Cell[234131, 4785, 1056, 15, 22, "Print"],
+Cell[235190, 4802, 1222, 20, 21, "Print"],
+Cell[236415, 4824, 1220, 20, 21, "Print"],
+Cell[237638, 4846, 1208, 20, 21, "Print"],
+Cell[238849, 4868, 1211, 20, 21, "Print"],
+Cell[240063, 4890, 1211, 20, 21, "Print"],
+Cell[241277, 4912, 1058, 15, 22, "Print"],
+Cell[242338, 4929, 1208, 20, 21, "Print"],
+Cell[243549, 4951, 1254, 20, 24, "Print"],
+Cell[244806, 4973, 1281, 21, 24, "Print"],
+Cell[246090, 4996, 1033, 15, 21, "Print"],
+Cell[247126, 5013, 1082, 16, 22, "Print"],
+Cell[248211, 5031, 1056, 15, 22, "Print"],
+Cell[249270, 5048, 1204, 20, 21, "Print"],
+Cell[250477, 5070, 1209, 20, 21, "Print"],
+Cell[251689, 5092, 1188, 19, 21, "Print"],
+Cell[252880, 5113, 1193, 19, 21, "Print"],
+Cell[254076, 5134, 1190, 19, 21, "Print"],
+Cell[255269, 5155, 1059, 15, 22, "Print"],
+Cell[256331, 5172, 1188, 19, 21, "Print"],
+Cell[257522, 5193, 1250, 20, 22, "Print"],
+Cell[258775, 5215, 1625, 27, 24, "Print"],
+Cell[260403, 5244, 1035, 15, 21, "Print"],
+Cell[261441, 5261, 1075, 15, 22, "Print"],
+Cell[262519, 5278, 1056, 15, 22, "Print"],
+Cell[263578, 5295, 1223, 20, 21, "Print"],
+Cell[264804, 5317, 1225, 20, 21, "Print"],
+Cell[266032, 5339, 1208, 20, 21, "Print"],
+Cell[267243, 5361, 1213, 20, 21, "Print"],
+Cell[268459, 5383, 1211, 20, 21, "Print"],
+Cell[269673, 5405, 1061, 15, 22, "Print"],
+Cell[270737, 5422, 1188, 19, 21, "Print"],
+Cell[271928, 5443, 1260, 21, 24, "Print"],
+Cell[273191, 5466, 1634, 27, 24, "Print"],
+Cell[274828, 5495, 1033, 15, 21, "Print"],
+Cell[275864, 5512, 1083, 16, 22, "Print"],
+Cell[276950, 5530, 1058, 15, 22, "Print"],
+Cell[278011, 5547, 1220, 20, 21, "Print"],
+Cell[279234, 5569, 1220, 20, 21, "Print"],
+Cell[280457, 5591, 1210, 20, 21, "Print"],
+Cell[281670, 5613, 1190, 19, 21, "Print"],
+Cell[282863, 5634, 1186, 19, 21, "Print"],
+Cell[284052, 5655, 1059, 15, 22, "Print"],
+Cell[285114, 5672, 1208, 20, 21, "Print"],
+Cell[286325, 5694, 1247, 20, 22, "Print"],
+Cell[287575, 5716, 1706, 28, 24, "Print"],
+Cell[289284, 5746, 1033, 15, 21, "Print"],
+Cell[290320, 5763, 1085, 16, 22, "Print"],
+Cell[291408, 5781, 1056, 15, 22, "Print"],
+Cell[292467, 5798, 1209, 20, 21, "Print"],
+Cell[293679, 5820, 1207, 20, 21, "Print"],
+Cell[294889, 5842, 1191, 19, 21, "Print"],
+Cell[296083, 5863, 1188, 19, 21, "Print"],
+Cell[297274, 5884, 1190, 19, 21, "Print"],
+Cell[298467, 5905, 1059, 15, 22, "Print"],
+Cell[299529, 5922, 1210, 20, 21, "Print"],
+Cell[300742, 5944, 1264, 21, 24, "Print"],
+Cell[302009, 5967, 1284, 22, 24, "Print"],
+Cell[303296, 5991, 1033, 15, 21, "Print"],
+Cell[304332, 6008, 1084, 16, 22, "Print"],
+Cell[305419, 6026, 1033, 15, 21, "Print"],
+Cell[306455, 6043, 1084, 16, 22, "Print"],
+Cell[307542, 6061, 1035, 15, 21, "Print"],
+Cell[308580, 6078, 1104, 16, 22, "Print"],
+Cell[309687, 6096, 1055, 15, 22, "Print"],
+Cell[310745, 6113, 1214, 20, 21, "Print"],
+Cell[311962, 6135, 1214, 20, 21, "Print"],
+Cell[313179, 6157, 1204, 20, 21, "Print"],
+Cell[314386, 6179, 1202, 20, 21, "Print"],
+Cell[315591, 6201, 1202, 20, 21, "Print"],
+Cell[316796, 6223, 1058, 15, 22, "Print"],
+Cell[317857, 6240, 1220, 20, 21, "Print"],
+Cell[319080, 6262, 1327, 23, 22, "Print"],
+Cell[320410, 6287, 1332, 23, 22, "Print"],
+Cell[321745, 6312, 1033, 15, 21, "Print"],
+Cell[322781, 6329, 1298, 21, 22, "Print"],
+Cell[324082, 6352, 1053, 15, 21, "Print"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[281128, 5480, 1164, 32, 58, "Input"],
-Cell[282295, 5514, 613, 12, 41, "Message"],
-Cell[282911, 5528, 1016, 26, 113, "Output"],
-Cell[283930, 5556, 614, 12, 41, "Message"],
-Cell[284547, 5570, 3673, 98, 357, "Output"]
+Cell[325184, 6373, 1164, 32, 58, "Input"],
+Cell[326351, 6407, 613, 12, 41, "Message"],
+Cell[326967, 6421, 1016, 26, 113, "Output"],
+Cell[327986, 6449, 614, 12, 41, "Message"],
+Cell[328603, 6463, 3673, 98, 357, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[288257, 5673, 1058, 27, 46, "Input"],
-Cell[289318, 5702, 4201, 81, 236, "Output"],
-Cell[293522, 5785, 2873, 59, 239, "Output"]
+Cell[332313, 6566, 1058, 27, 46, "Input"],
+Cell[333374, 6595, 4201, 81, 236, "Output"],
+Cell[337578, 6678, 2873, 59, 239, "Output"]
 }, Open  ]]
 }
 ]

@@ -1,0 +1,10 @@
+%chk=H2.chk
+#p opt freq b3lyp/6-31g(d,p) scrf=(iefpcm,solvent=acetonitrile)
+empiricaldispersion=gd3
+
+Title Card Required
+
+0 1
+ H                  0.14937108   -0.89622640    0.00000000
+ H                  0.61604582   -0.23626615    1.14309543
+
