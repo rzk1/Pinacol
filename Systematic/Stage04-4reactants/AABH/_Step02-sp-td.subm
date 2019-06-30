@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --time=02:00:00
+#SBATCH --time=03:00:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=40
 # -- #SBATCH --ntasks=40
 #SBATCH --mem=MaxMemPerNode
 #SBATCH --account=ctb-rzk
-#SBATCH --job-name=ABH
-#SBATCH --error=_ABH.stde
-#SBATCH --output=_ABH.stdo
+#SBATCH --job-name=Step02-sp-td
+#SBATCH --error=_Step02-sp-td.stde
+#SBATCH --output=_Step02-sp-td.stdo
 
 # set EXE environment
 module load G16
@@ -16,4 +16,4 @@ export PATH
 workd=${SLURM_SUBMIT_DIR}
 cd $workd
 
-g16 < ABH.gjf >& $workd/ABH.log
+g16 < Step02-sp-td.gjf >& $workd/Step02-sp-td.log
