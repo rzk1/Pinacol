@@ -8,7 +8,7 @@ do
  fi
  sed -e "s/ZZZ/$i/g" template.gjf > $i/AH-NTO-State-$i.gjf
  cd $i
- submit_g16.pl 32 00 05 AH-NTO-State-$i
+ g16 < AH-NTO-State-$i.gjf > AH-NTO-State-$i.log
  cd $workDir
 done
 

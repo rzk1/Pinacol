@@ -1,4 +1,4 @@
-%NProcShared=40
+%NProcShared=8
 %chk=AH.chk
 #p td=(50-50,nstates=12) rb3lyp/6-31g(d,p)
 scrf=(iefpcm,solvent=acetonitrile)
