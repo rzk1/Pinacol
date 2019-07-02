@@ -1,7 +1,7 @@
-%NProcShared=32
+%NProcShared=40
 %chk=AH.chk
-#p td=(50-50,nstates=12) ub3lyp/6-31g(d,p)
-scrf=(iefpcm,solvent=acetonitrile) guess=(core,mix,always)
+#p td=(50-50,nstates=12) rb3lyp/6-31g(d,p)
+scrf=(iefpcm,solvent=acetonitrile)
 empiricaldispersion=gd3
 
 Title Card Required
