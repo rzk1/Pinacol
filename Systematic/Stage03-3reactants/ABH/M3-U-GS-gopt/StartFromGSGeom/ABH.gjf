@@ -1,3 +1,5 @@
+%NProcShared=40
+%chk=ABH.chk
 #p opt ub3lyp/6-31g(d,p) scrf=(iefpcm,solvent=acetonitrile)
 empiricaldispersion=gd3
 

@@ -1,3 +1,5 @@
+%NProcShared=40
+%chk=ABH.chk
 #p opt td=(nstates=6,root=01) ub3lyp/6-31g(d,p)
 scrf=(iefpcm,solvent=acetonitrile) guess=(core,mix,always)
 empiricaldispersion=gd3

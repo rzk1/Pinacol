@@ -1,3 +1,4 @@
+%Chk=AH-NTO-State-ZZZ.chk
 %OldChk=../AH.chk
 #p geom=allcheck guess=(read,only) density=(check,transition=ZZZ) 
 Pop=(Minimal,NTO,SaveNTO) ub3lyp/6-31g(d,p)

@@ -1,7 +1,7 @@
  Entering Gaussian System, Link 0=g16
  Initial command:
- /project/6004141/group/g16/g16/l1.exe "/scratch/rzk/GaussianScratch/Gau-169813.inp" -scrdir="/scratch/rzk/GaussianScratch/"
- Entering Link 1 = /project/6004141/group/g16/g16/l1.exe PID=    169814.
+ /project/6004141/group/g16/g16/l1.exe "/scratch/rzk/GaussianScratch/Gau-226893.inp" -scrdir="/scratch/rzk/GaussianScratch/"
+ Entering Link 1 = /project/6004141/group/g16/g16/l1.exe PID=    226894.
   
  Copyright (c) 1988,1990,1992,1993,1995,1998,2003,2009,2016,
             Gaussian, Inc.  All Rights Reserved.
@@ -77,8 +77,9 @@
  Gaussian 16:  ES64L-G16RevA.03 25-Dec-2016
                  1-Jul-2019 
  ******************************************
+ %Chk=AH-NTO-State-05.chk
  %OldChk=../AH.chk
- Copying data from "../AH.chk" to current chk file "/scratch/rzk/GaussianScratch/Gau-169814.chk"
+ Copying data from "../AH.chk" to current chk file "AH-NTO-State-05.chk"
  IOpt=  2 FromEx=T IUOpen= 4 IOptOp= 5 NList=   0 IFRang= 0 IUIn= 4 IUOut= 2.
  ----------------------------------------------------------------------
  #p geom=allcheck guess=(read,only) density=(check,transition=05) Pop=(
@@ -92,9 +93,9 @@
  4/5=1/1;
  6/7=2,8=2,9=2,10=2,11=2,22=-10,28=1,29=5,89=11/1;
  99/5=2/99;
- Leave Link    1 at Mon Jul  1 22:12:29 2019, MaxMem=   104857600 cpu:               0.1 elap:               0.3
+ Leave Link    1 at Mon Jul  1 22:57:12 2019, MaxMem=   104857600 cpu:               0.1 elap:               0.3
  (Enter /project/6004141/group/g16/g16/l101.exe)
- Structure from the checkpoint file:  "/scratch/rzk/GaussianScratch/Gau-169814.chk"
+ Structure from the checkpoint file:  "AH-NTO-State-05.chk"
  -------------------
  Title Card Required
  -------------------
@@ -143,7 +144,7 @@
  NQMom=    0.0000000   0.0000000   0.0000000   0.0000000   0.0000000   0.0000000   0.0000000
  NMagM=    2.7928460   0.0000000   2.7928460   0.0000000   2.7928460   2.7928460   2.7928460
  AtZNuc=   1.0000000   6.0000000   1.0000000   6.0000000   1.0000000   1.0000000   1.0000000
- Leave Link  101 at Mon Jul  1 22:12:29 2019, MaxMem=   104857600 cpu:               0.2 elap:               0.2
+ Leave Link  101 at Mon Jul  1 22:57:13 2019, MaxMem=   104857600 cpu:               0.2 elap:               0.2
  (Enter /project/6004141/group/g16/g16/l202.exe)
                           Input orientation:                          
  ---------------------------------------------------------------------
@@ -242,9 +243,9 @@
      17          1           0        3.675304    0.179252   -0.000125
  ---------------------------------------------------------------------
  Rotational constants (GHZ):           3.6751930           1.2126784           0.9169999
- Leave Link  202 at Mon Jul  1 22:12:29 2019, MaxMem=   104857600 cpu:               0.0 elap:               0.0
+ Leave Link  202 at Mon Jul  1 22:57:13 2019, MaxMem=   104857600 cpu:               0.0 elap:               0.0
  (Enter /project/6004141/group/g16/g16/l301.exe)
- Basis read from chk: "/scratch/rzk/GaussianScratch/Gau-169814.chk" (6D, 7F)
+ Basis read from chk: "AH-NTO-State-05.chk" (6D, 7F)
  No pseudopotential information found on chk file.
  There are   175 symmetry adapted cartesian basis functions of A   symmetry.
  There are   175 symmetry adapted basis functions of A   symmetry.
@@ -311,7 +312,7 @@
  GePol: Fraction of low-weight points (<1% of avg)   =       5.81%
  GePol: Cavity surface area                          =    189.225 Ang**2
  GePol: Cavity volume                                =    188.062 Ang**3
- Leave Link  301 at Mon Jul  1 22:12:29 2019, MaxMem=   104857600 cpu:               0.1 elap:               0.1
+ Leave Link  301 at Mon Jul  1 22:57:13 2019, MaxMem=   104857600 cpu:               0.1 elap:               0.1
  (Enter /project/6004141/group/g16/g16/l302.exe)
  NPDir=0 NMtPBC=     1 NCelOv=     1 NCel=       1 NClECP=     1 NCelD=      1
          NCelK=      1 NCelE2=     1 NClLst=     1 CellRange=     0.0.
@@ -323,18 +324,18 @@
  IXCGrd= 4 IRadAn=           5 IRanWt=          -1 IRanGd=           0 AccXCQ= 0.00D+00.
  Generated NRdTot=       0 NPtTot=           0 NUsed=           0 NTot=          32
  NSgBfM=   175   175   175   175   175 MxSgAt=    17 MxSgA2=    17.
- Leave Link  302 at Mon Jul  1 22:12:30 2019, MaxMem=   104857600 cpu:               0.3 elap:               0.3
+ Leave Link  302 at Mon Jul  1 22:57:13 2019, MaxMem=   104857600 cpu:               0.3 elap:               0.3
  (Enter /project/6004141/group/g16/g16/l303.exe)
  DipDrv:  MaxL=1.
- Leave Link  303 at Mon Jul  1 22:12:30 2019, MaxMem=   104857600 cpu:               0.0 elap:               0.0
+ Leave Link  303 at Mon Jul  1 22:57:13 2019, MaxMem=   104857600 cpu:               0.0 elap:               0.0
  (Enter /project/6004141/group/g16/g16/l401.exe)
- Initial guess from the checkpoint file:  "/scratch/rzk/GaussianScratch/Gau-169814.chk"
+ Initial guess from the checkpoint file:  "AH-NTO-State-05.chk"
  B after Tr=    -0.000000    0.000000    0.000000
          Rot=    1.000000   -0.000000    0.000000   -0.000000 Ang=   0.00 deg.
  Guess basis will be translated and rotated to current coordinates.
  JPrj=2 DoOrth=T DoCkMO=T.
  Initial guess <Sx>= 0.0000 <Sy>= 0.0000 <Sz>= 0.0000 <S**2>=-0.0000 S=-0.0000
- Leave Link  401 at Mon Jul  1 22:12:30 2019, MaxMem=   104857600 cpu:               0.1 elap:               0.1
+ Leave Link  401 at Mon Jul  1 22:57:13 2019, MaxMem=   104857600 cpu:               0.1 elap:               0.1
  (Enter /project/6004141/group/g16/g16/l601.exe)
  Using densities on the checkpoint file.
  Saving Alpha spin NTOs for state    5 to file 20524.
@@ -613,17 +614,18 @@
  ZZZY=             -0.1276 XXYY=              0.2647 XXZZ=              0.5814 YYZZ=             -0.1455
  XXYZ=             -0.9232 YYXZ=             -0.2010 ZZXY=             -0.8516
  N-N= 4.005117386504D+02 E-N= 5.735102699798D-01  KE=-8.109695057209D-02
- Leave Link  601 at Mon Jul  1 22:12:30 2019, MaxMem=   104857600 cpu:               0.1 elap:               0.1
+ Leave Link  601 at Mon Jul  1 22:57:13 2019, MaxMem=   104857600 cpu:               0.1 elap:               0.1
  (Enter /project/6004141/group/g16/g16/l9999.exe)
 
  This type of calculation cannot be archived.
 
 
- TOM, TOM, THE BURGLAR'S SON
- STOLE A MACHINE AND AWAY HE RUN
- THE JOB WAS NEAT, BUT TOM GOT BEAT
- BY THE TIME HE GOT HOME IT WAS OBSOLETE.
+ WE STILL HAVE JUDGEMENT HERE,
+ THAT WE TEACH BUT BLOODY INSTRUCTIONS,
+ WHICH, BEING TAUGHT,
+ RETURN TO PLAGUE THE INVENTOR.
+           MACBETH ACT I, SCENE VII
  Job cpu time:       0 days  0 hours  0 minutes  1.0 seconds.
- Elapsed time:       0 days  0 hours  0 minutes  1.2 seconds.
+ Elapsed time:       0 days  0 hours  0 minutes  1.1 seconds.
  File lengths (MBytes):  RWF=     56 Int=      0 D2E=      0 Chk=     67 Scr=      2
- Normal termination of Gaussian 16 at Mon Jul  1 22:12:30 2019.
+ Normal termination of Gaussian 16 at Mon Jul  1 22:57:13 2019.
